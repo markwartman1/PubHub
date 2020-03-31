@@ -341,6 +341,7 @@ public class BookDAOImpl implements BookDAO {
 		try {
 			if (connection != null)
 				connection.close();
+			System.out.println("Closing down connection...");
 		} catch (SQLException e) {
 			System.out.println("Could not close connection!");
 			e.printStackTrace();

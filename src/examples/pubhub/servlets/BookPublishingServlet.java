@@ -32,7 +32,7 @@ public class BookPublishingServlet extends HttpServlet {
 
 		
 		/**
-		 * get Tags for each and every book and load them into the book object
+		 * get Tags for each and every of book-list and load them into the book object
 		 */
 		//String isbn13 = request.getParameter("isbn13");
 		//System.out.println("This is isbn13: " + isbn13);

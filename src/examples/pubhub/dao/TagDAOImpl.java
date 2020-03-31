@@ -191,11 +191,12 @@ public class TagDAOImpl implements TagDAO {
 
 		try {
 			connection = DAOUtilities.getConnection();
-			String sql = "DELETE book_tags WHERE isbn_13=?"; // note '?'
+			String sql = "DELETE from book_tags WHERE isbn_13=? and tag_name=?"; // note '?'
 			stmt = connection.prepareStatement(sql);
 			
 			// Setting '?' value
 			stmt.setString(1, tag.getIsbn_13());
+			stmt.setString(2, tag.getTag_name());
 			
 			// If stmt.executeUpdate() value is not 0, update is successful
 			if (stmt.executeUpdate() != 0)
@@ -228,6 +229,7 @@ public class TagDAOImpl implements TagDAO {
 		try {
 			if (connection != null)
 				connection.close();
+				System.out.println("Closing down connection...");
 		} catch (SQLException e) {
 			System.out.println("Could not close connection!");
 			e.printStackTrace();

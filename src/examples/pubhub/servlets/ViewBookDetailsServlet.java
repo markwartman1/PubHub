@@ -1,6 +1,8 @@
 package examples.pubhub.servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import examples.pubhub.dao.BookDAO;
+import examples.pubhub.dao.TagDAO;
 import examples.pubhub.model.Book;
+import examples.pubhub.model.Tag;
 import examples.pubhub.utilities.DAOUtilities;
 
 /**
@@ -34,6 +38,18 @@ public class ViewBookDetailsServlet extends HttpServlet {
 		
 		BookDAO dao = DAOUtilities.getBookDAO();
 		Book book = dao.getBookByISBN(isbn13);
+		
+		/**
+		 * Redundancy of code below:
+		 * this has already been done in another servlet: 
+		 * could be resolved by Forwarding or getting Session object?? 
+		 */
+		TagDAO tdao = DAOUtilities.getTagDAO();
+		List<Tag> tagList = tdao.getTagsByBook(isbn13);
+		for (Tag t : tagList) {
+			book.addBook_tags(t);
+		}
+		System.out.println("size of list: " + book.getListOfTagsOfBook().size());
 		
 		request.setAttribute("book", book);
 		

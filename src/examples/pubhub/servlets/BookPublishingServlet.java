@@ -28,7 +28,7 @@ public class BookPublishingServlet extends HttpServlet {
 		// Grab the list of Books from the Database
 		BookDAO dao = DAOUtilities.getBookDAO();
 		List<Book> bookList = dao.getAllBooks();
-
+		System.out.println("\n\ndoGet: BookPublishingServlet is running...");
 
 		
 		/**
